@@ -3,21 +3,39 @@ import logging
 import os
 import pprint
 import re
+import requests
 import traceback
 from urllib import urlopen
 import xmlrpclib
 
 
-base_url = 'http://pypi.python.org'
+base_url = 'http://pypi.python.org/pypi'
 
 how_many_to_chart = 200
 
 
-CLIENT = xmlrpclib.ServerProxy('http://pypi.python.org/pypi')
+SESSION = requests.Session()
+
+
+def req_rpc(method, *args):
+    payload = xmlrpclib.dumps(args, method)
+
+    response = SESSION.post(
+        base_url,
+        data=payload,
+        headers={'Content-Type': 'text/xml'},
+#        stream=False,
+    )
+    if response.status_code == 200:
+        result = xmlrpclib.loads(response.content)[0][0]
+        return result
+    else:
+        # Some error occurred
+        pass
 
 
 def get_package_info(name):
-    release_list = CLIENT.package_releases(name, True)
+    release_list = req_rpc('package_releases', name, True)
     latest_version = sorted(release_list)[-1]
 
     downloads = 0
@@ -26,7 +44,7 @@ def get_package_info(name):
     for release in release_list:
         for i in range(3):
             try:
-                urls_metadata_list = CLIENT.release_urls(name, release)
+                urls_metadata_list = req_rpc('release_urls', name, release)
                 break
             except xmlrpclib.ProtocolError, e:
                 # retry 3 times
@@ -51,7 +69,7 @@ def get_package_info(name):
 
 
 def get_list_of_packages():
-    return CLIENT.list_packages()
+    return req_rpc('list_packages')
 
 
 def get_packages():
@@ -129,3 +147,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
