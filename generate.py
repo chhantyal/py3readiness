@@ -54,9 +54,7 @@ def build_html(packages):
 
 
 def main():
-    #package_names = get_list_of_packages()
-    package_names = ['Django', 'Pillow', 'tvrenamr', 'django-orderable']
-    #package_names = ['django-orderable']
+    package_names = get_list_of_packages()
     packages = get_from_pypi(package_names)
     backup_to_file(packages, 'results.txt')
 
