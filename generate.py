@@ -33,7 +33,7 @@ def chop_to_size(packages, size):
 
 
 def add_css_class(packages):
-    # I wholeheartedly appologise for this display logic.
+    # I wholeheartedly apologise for this display logic.
     for package in packages:
         extra = {'value': 1}
         if package['generic_wheel']:
