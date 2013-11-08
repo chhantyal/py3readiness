@@ -7,12 +7,12 @@
     <script type="text/javascript">
         window.onload = function(){
             var data = [
-            /*{% for package in packages %}
+            {% for package in packages %}
                 {
                     value: 1,
                     color: '{% if package.css_class == 'success' %}#47a447{% elif package.css_class == 'warning' %}#ed9c28{% else %}#d2322d{% endif %}',
-                }
-            {% endfor %}*/
+                },
+            {% endfor %}
             ];
             var ctx = document.getElementById("wheel").getContext("2d");
             new Chart(ctx).Doughnut(data, {
@@ -21,7 +21,7 @@
             });
         };
     </script>
-    <style>canvas {width:320px;}</style>
+    <style>canvas, body{width: 500px; text-align: center;}</style>
 </head>
 <body>
     <div class="container">
@@ -29,7 +29,7 @@
         <table class="table">
             <tbody>
             {% for package in packages %}
-                <tr class="{{ package.css_class }}"><td>{{ package.name }}</td></tr>
+                <tr class="btn-{{ package.css_class }}"><td>{{ package.name }}</td></tr>
             {% endfor %}
             </tbody>
         </table>

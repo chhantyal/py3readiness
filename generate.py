@@ -34,11 +34,11 @@ def chop_to_size(packages, size):
 def add_css_class(packages):
     for package in packages:
         if package['generic_wheel']:
-            css_class = 'btn-success'
+            css_class = 'success'
         elif package['wheel']:
-            css_class = 'btn-warning'
+            css_class = 'warning'
         else:
-            css_class = 'btn-danger'
+            css_class = 'danger'
         package['css_class'] = css_class
 
 
