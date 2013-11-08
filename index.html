@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
+    <script src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            function json_success(response){
+                // Create doughnut
+                var data = response['data'];
+                var ctx = document.getElementById("wheel").getContext("2d");
+                new Chart(ctx).Doughnut(data, {
+                    animation: false,
+                    segmentShowStroke: false
+                });
+
+                // Populate table
+                var tbl_body = "";
+                $.each(data, function(i, v) {
+                    var line = '<a class="btn btn-' + v['css_class'] +
+                               '" href="https://pypi.python.org/pypi/' + v['name'] + '">' +
+                                v['name'] + '</a>';
+                    tbl_body += line;
+                })
+                $(".list").html(tbl_body);
+
+            };
+            $.getJSON('results.json', json_success);
+        });
+    </script>
+    <style>
+    a.btn, canvas, body{width: 500px; text-align: center;}
+    canvas, body{margin-bottom:15px;}
+    a.btn {border-width: 0; border-radius: 0;}
+    </style>
+</head>
+<body class="center-block">
+    <h1>Python Wheel of Shame</h1>
+    <canvas class="center-block" id="wheel" width="320" height="320"></canvas>
+    <div class="list"></div>
+</body>
+</html>

@@ -47,16 +47,6 @@ def add_css_class(packages):
             extra['color'] = '#d2322d'
         package.update(extra)
 
-def build_html(packages):
-    with open('html_template.html', 'r') as input_file:
-        template = jinja2.Template(input_file.read())
-
-    return template.render(
-        title='Python Wheel of Shame',
-        packages=packages,
-    )
-
-
 
 def main():
     package_names = get_list_of_packages()
@@ -65,13 +55,8 @@ def main():
     add_css_class(packages)
     backup_to_file(packages, 'results.json')
 
-    html = build_html(packages)
-
-    open('results.html', 'w').write(html)
-
     open('date.txt', 'w').write(datetime.datetime.now().isoformat())
 
 
 if __name__ == '__main__':
     main()
-
