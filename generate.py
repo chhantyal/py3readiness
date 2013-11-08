@@ -33,15 +33,19 @@ def chop_to_size(packages, size):
 
 
 def add_css_class(packages):
+    # I wholeheartedly appologise for this display logic.
     for package in packages:
+        extra = {'value': 1}
         if package['generic_wheel']:
-            css_class = 'success'
+            extra['css_class'] = 'success'
+            extra['color'] = '#47a447'
         elif package['wheel']:
-            css_class = 'warning'
+            extra['css_class'] = 'warning'
+            extra['color'] = '#ed9c28'
         else:
-            css_class = 'danger'
-        package['css_class'] = css_class
-
+            extra['css_class'] = 'danger'
+            extra['color'] = '#d2322d'
+        package.update(extra)
 
 def build_html(packages):
     with open('html_template.html', 'r') as input_file:
