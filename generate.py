@@ -24,8 +24,12 @@ def get_from_pypi(package_names):
 
 
 def backup_to_file(packages, file_name):
+    now = datetime.date.today()
     with open(file_name, 'w') as f:
-        f.write(json.dumps({'data': packages}))
+        f.write(json.dumps({
+            'data': packages,
+            'last_update': now.strftime('%d %B %Y'),
+        }))
 
 
 def chop_to_size(packages, size):
@@ -54,8 +58,6 @@ def main():
     packages = chop_to_size(packages, how_many_to_chart)
     add_css_class(packages)
     backup_to_file(packages, 'results.json')
-
-    open('date.txt', 'w').write(datetime.datetime.now().isoformat())
 
 
 if __name__ == '__main__':

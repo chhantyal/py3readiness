@@ -8,6 +8,10 @@
     <script type="text/javascript">
         $(function(){
             function json_success(response){
+                // Update copy
+                console.log(response);
+                $("span.date").html(response['last_update']);
+
                 // Create doughnut
                 var data = response['data'];
                 var ctx = document.getElementById("wheel").getContext("2d");
@@ -31,7 +35,7 @@
     </script>
     <style>
         a.btn, canvas, body{width: 500px; text-align: center;}
-        canvas, body{margin-bottom:15px;}
+        a.btn:last-child, canvas, body{margin-bottom:15px;}
         a.btn {border-bottom-width: 0; border-radius: 0;}
         a.btn:last-child{border-bottom-width: 1px;}
     </style>
@@ -40,5 +44,6 @@
     <h1>Python Wheel of Shame</h1>
     <canvas class="center-block" id="wheel" width="320" height="320"></canvas>
     <div class="list"></div>
+    <p>Last update: <span class="date"></span></p>
 </body>
 </html>
