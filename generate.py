@@ -1,4 +1,5 @@
 import datetime
+import json
 import pprint
 
 import jinja2
@@ -24,7 +25,7 @@ def get_from_pypi(package_names):
 
 def backup_to_file(packages, file_name):
     with open(file_name, 'w') as f:
-        f.write(pprint.pformat(packages))
+        f.write(json.dumps({'data': packages}))
 
 
 def chop_to_size(packages, size):
@@ -56,10 +57,10 @@ def build_html(packages):
 def main():
     package_names = get_list_of_packages()
     packages = get_from_pypi(package_names)
-    backup_to_file(packages, 'results.txt')
-
     packages = chop_to_size(packages, how_many_to_chart)
     add_css_class(packages)
+    backup_to_file(packages, 'results.json')
+
     html = build_html(packages)
 
     open('results.html', 'w').write(html)
