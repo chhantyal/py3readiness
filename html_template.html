@@ -23,17 +23,15 @@
     </script>
     <style>canvas, body{width: 500px; text-align: center;}</style>
 </head>
-<body>
-    <div class="container">
-        <h1>{{title}}</h1>
-        <table class="table">
-            <tbody>
-            {% for package in packages %}
-                <tr class="btn-{{ package.css_class }}"><td>{{ package.name }}</td></tr>
-            {% endfor %}
-            </tbody>
-        </table>
-            <canvas class="center-block" id="wheel" width="320" height="320"></canvas>
-    </div>
+<body class="center-block">
+    <h1>{{title}}</h1>
+    <canvas class="center-block" id="wheel" width="320" height="320"></canvas>
+    <table class="table">
+        <tbody>
+        {% for package in packages %}
+            <tr class="btn-{{ package.css_class }}"><td>{{ package.name }}</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
