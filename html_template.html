@@ -3,6 +3,25 @@
 <head>
     <meta charset="utf-8">
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function(){
+            var data = [
+            /*{% for package in packages %}
+                {
+                    value: 1,
+                    color: '{% if package.css_class == 'success' %}#47a447{% elif package.css_class == 'warning' %}#ed9c28{% else %}#d2322d{% endif %}',
+                }
+            {% endfor %}*/
+            ];
+            var ctx = document.getElementById("wheel").getContext("2d");
+            new Chart(ctx).Doughnut(data, {
+                animation: false,
+                segmentShowStroke : false
+            });
+        };
+    </script>
+    <style>canvas {width:320px;}</style>
 </head>
 <body>
     <div class="container">
@@ -14,6 +33,7 @@
             {% endfor %}
             </tbody>
         </table>
+            <canvas class="center-block" id="wheel" width="320" height="320"></canvas>
     </div>
 </body>
 </html>
