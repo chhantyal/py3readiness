@@ -25,15 +25,15 @@
                     tbl_body += line;
                 })
                 $(".list").html(tbl_body);
-
             };
             $.getJSON('results.json', json_success);
         });
     </script>
     <style>
-    a.btn, canvas, body{width: 500px; text-align: center;}
-    canvas, body{margin-bottom:15px;}
-    a.btn {border-width: 0; border-radius: 0;}
+        a.btn, canvas, body{width: 500px; text-align: center;}
+        canvas, body{margin-bottom:15px;}
+        a.btn {border-bottom-width: 0; border-radius: 0;}
+        a.btn:last-child{border-bottom-width: 1px;}
     </style>
 </head>
 <body class="center-block">
