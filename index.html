@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
-    <script src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript">
         $(function(){
             function json_success(response){
@@ -33,6 +32,7 @@
             $.getJSON('results.json', json_success);
         });
     </script>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         a.btn, canvas, body{width: 500px; text-align: center;}
         a.btn:last-child, canvas, body{margin-bottom:15px;}
