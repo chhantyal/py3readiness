@@ -42,7 +42,7 @@ def get_package_info(name):
             try:
                 urls_metadata_list = req_rpc('release_urls', name, release)
                 break
-            except xmlrpclib.ProtocolError, e:
+            except xmlrpclib.ProtocolError as e:
                 # retry 3 times
                 strace = traceback.format_exc()
                 logging.error("retry %s xmlrpclib: %s" % (i, strace))
@@ -72,12 +72,12 @@ def get_packages(package_names):
     for pkg in package_names:
         try:
             info = get_package_info(pkg)
-        except Exception, e:
+        except Exception as e:
             print(pkg)
             print(e)
             continue
 
-        print info
+        print(info)
         yield info
 
 
