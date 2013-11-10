@@ -1,11 +1,8 @@
-import logging
 import requests
-import traceback
 import xmlrpclib
-from distutils.version import LooseVersion
 
 
-base_url = 'http://pypi.python.org/pypi'
+BASE_URL = 'http://pypi.python.org/pypi'
 
 
 SESSION = requests.Session()
@@ -15,10 +12,9 @@ def req_rpc(method, *args):
     payload = xmlrpclib.dumps(args, method)
 
     response = SESSION.post(
-        base_url,
+        BASE_URL,
         data=payload,
         headers={'Content-Type': 'text/xml'},
-#        stream=False,
     )
     if response.status_code == 200:
         result = xmlrpclib.loads(response.content)[0][0]
@@ -28,74 +24,50 @@ def req_rpc(method, *args):
         pass
 
 
-def get_package_versions(package_name):
-    versions = req_rpc('package_releases', package_name, True)
-    return sorted(versions, key=LooseVersion)
+def get_json_url(package_name):
+    return BASE_URL + '/' + package_name + '/json'
 
 
-def get_package_info(package_name):
-    release_list = get_package_versions(package_name)
-    latest_version = release_list[-1]
-
-    downloads = 0
-    generic_wheel = False
-    has_wheel = False
-    for release in release_list:
-        for i in range(3):
-            try:
-                urls_metadata_list = req_rpc('release_urls', package_name, release)
-                break
-            except xmlrpclib.ProtocolError:
-                # retry 3 times
-                strace = traceback.format_exc()
-                logging.error("retry %s xmlrpclib: %s" % (i, strace))
-
-        for url_metadata in urls_metadata_list:
-            if release == latest_version and url_metadata['packagetype'] == 'bdist_wheel':
+def annotate_wheels(packages):
+    print('Getting wheel data...')
+    num_packages = len(packages)
+    for index, package in enumerate(packages):
+        print index + 1, num_packages, package['name']
+        generic_wheel = False
+        has_wheel = False
+        url = get_json_url(package['name'])
+        response = SESSION.get(url)
+        if response.status_code != 200:
+            print(' ! Skipping ' + package['name'])
+            continue
+        data = response.json()
+        for download in data['urls']:
+            if download['packagetype'] == 'bdist_wheel':
                 has_wheel = True
-                generic_wheel = url_metadata['filename'].endswith('none-any.whl')
-            downloads += url_metadata['downloads']
+                generic_wheel = download['filename'].endswith('none-any.whl')
+        package['wheel'] = has_wheel
+        package['generic_wheel'] = generic_wheel
 
-    # NOTE: packages with no releases or no url's just throw an exception.
-    info = dict(
-        downloads=downloads,
-        name=package_name,
-        wheel=has_wheel,
-        generic_wheel=generic_wheel,
-    )
-
-    return info
-
-
-def get_list_of_packages():
-    return req_rpc('list_packages')
-
-
-def get_packages(package_names):
-    for pkg in package_names:
-        try:
-            info = get_package_info(pkg)
-        except Exception as e:
-            print(pkg)
-            print(e)
-            continue
-
-        print(info)
-        yield info
-
-
-def count_good(packages_list):
-    good = 0
-    for package in packages_list:
-        if package['wheel']:
-            good += 1
-    return good
-
-
-def remove_irrelevant_packages(packages):
-    to_ignore = 'multiprocessing', 'simplejson', 'argparse', 'uuid', 'setuptools'
-    for pkg in packages:
-        if pkg['name'] in to_ignore:
-            continue
+        # Display logic. I know, I'm sorry.
+        package['value'] = 1
+        if generic_wheel:
+            package['css_class'] = 'success'
+            package['color'] = '#47a447'
+        elif has_wheel:
+            package['css_class'] = 'warning'
+            package['color'] = '#ed9c28'
         else:
-            yield pkg
+            package['css_class'] = 'danger'
+            package['color'] = '#d2322d'
+
+
+def get_top_packages():
+    print('Getting packages...')
+    # Reversing the list puts the most popular at the top.
+    packages = req_rpc('top_packages')
+    return [{'name': n, 'downloads': d} for n, d in packages]
+
+
+def remove_irrelevant_packages(packages, limit):
+    print('Removing cruft...')
+    return packages[:limit]
