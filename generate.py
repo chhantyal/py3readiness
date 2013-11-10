@@ -33,7 +33,7 @@ def backup_to_file(packages, file_name):
 
 
 def chop_to_size(packages, size):
-    return packages[-size:]
+    return packages[size:]
 
 
 def add_css_class(packages):
