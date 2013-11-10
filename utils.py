@@ -1,9 +1,6 @@
 import logging
-import os
-import re
 import requests
 import traceback
-from urllib import urlopen
 import xmlrpclib
 
 
