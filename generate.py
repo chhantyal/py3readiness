@@ -55,8 +55,9 @@ def add_css_class(packages):
 def main():
     package_names = get_list_of_packages()
     packages = get_from_pypi(package_names)
-    packages = chop_to_size(packages, how_many_to_chart)
     add_css_class(packages)
+    backup_to_file(packages, 'all_results.json')
+    packages = chop_to_size(packages, how_many_to_chart)
     backup_to_file(packages, 'results.json')
 
 
