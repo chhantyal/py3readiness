@@ -34,7 +34,7 @@ def get_package_versions(package_name):
 
 
 def get_package_info(package_name):
-    release_list = get_package_versions()
+    release_list = get_package_versions(package_name)
     latest_version = release_list[-1]
 
     downloads = 0
