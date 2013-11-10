@@ -2,7 +2,7 @@ import logging
 import requests
 import traceback
 import xmlrpclib
-from distutils.version import StrictVersion
+from distutils.version import LooseVersion
 
 
 base_url = 'http://pypi.python.org/pypi'
@@ -30,7 +30,7 @@ def req_rpc(method, *args):
 
 def get_package_versions(package_name):
     versions = req_rpc('package_releases', package_name, True)
-    return sorted(versions, key=StrictVersion)
+    return sorted(versions, key=LooseVersion)
 
 
 def get_package_info(package_name):
