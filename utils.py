@@ -30,8 +30,8 @@ def req_rpc(method, *args):
         pass
 
 
-def get_package_info(name):
-    release_list = req_rpc('package_releases', name, True)
+def get_package_info(package_name):
+    release_list = req_rpc('package_releases', package_name, True)
     latest_version = sorted(release_list)[-1]
 
     downloads = 0
@@ -40,7 +40,7 @@ def get_package_info(name):
     for release in release_list:
         for i in range(3):
             try:
-                urls_metadata_list = req_rpc('release_urls', name, release)
+                urls_metadata_list = req_rpc('release_urls', package_name, release)
                 break
             except xmlrpclib.ProtocolError as e:
                 # retry 3 times
@@ -56,7 +56,7 @@ def get_package_info(name):
     # NOTE: packages with no releases or no url's just throw an exception.
     info = dict(
         downloads=downloads,
-        name=name,
+        name=package_name,
         wheel=has_wheel,
         generic_wheel=generic_wheel,
     )
