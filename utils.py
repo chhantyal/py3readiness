@@ -2,6 +2,7 @@ import logging
 import requests
 import traceback
 import xmlrpclib
+from distutils.version import StrictVersion
 
 
 base_url = 'http://pypi.python.org/pypi'
@@ -27,9 +28,14 @@ def req_rpc(method, *args):
         pass
 
 
+def get_package_versions(package_name):
+    versions = req_rpc('package_releases', package_name, True)
+    return sorted(versions, key=StrictVersion)
+
+
 def get_package_info(package_name):
-    release_list = req_rpc('package_releases', package_name, True)
-    latest_version = sorted(release_list)[-1]
+    release_list = get_package_versions()
+    latest_version = release_list[-1]
 
     downloads = 0
     generic_wheel = False
