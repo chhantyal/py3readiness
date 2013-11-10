@@ -45,7 +45,7 @@ def get_package_info(package_name):
             try:
                 urls_metadata_list = req_rpc('release_urls', package_name, release)
                 break
-            except xmlrpclib.ProtocolError as e:
+            except xmlrpclib.ProtocolError:
                 # retry 3 times
                 strace = traceback.format_exc()
                 logging.error("retry %s xmlrpclib: %s" % (i, strace))
