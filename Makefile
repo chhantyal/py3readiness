@@ -7,5 +7,5 @@ generate:
 	python generate.py
 
 update:
-	s3cmd put index.html s3://wheelofshame/index.html
-	s3cmd put results.json s3://wheelofshame/results.json
+	s3cmd put index.html s3://wheelofshame/index.html  --cf-invalidate
+	s3cmd put results.json s3://wheelofshame/results.json  --cf-invalidate
