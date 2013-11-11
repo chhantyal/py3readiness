@@ -2,6 +2,7 @@ import datetime
 import json
 import xmlrpclib
 
+import pytz
 import requests
 
 
@@ -76,9 +77,9 @@ def remove_irrelevant_packages(packages, limit):
 
 
 def save_to_file(packages, file_name):
-    now = datetime.datetime.today()
+    now = datetime.datetime.utcnow().replace(tzinfo=pytz.utc)
     with open(file_name, 'w') as f:
         f.write(json.dumps({
             'data': packages,
-            'last_update': now.strftime('%d %B %Y'),
+            'last_update': now.strftime('%A, %d %B %Y, %X %Z.'),
         }))
