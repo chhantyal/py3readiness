@@ -1,5 +1,8 @@
-import requests
+import datetime
+import json
 import xmlrpclib
+
+import requests
 
 
 BASE_URL = 'http://pypi.python.org/pypi'
@@ -70,3 +73,12 @@ def get_top_packages():
 def remove_irrelevant_packages(packages, limit):
     print('Removing cruft...')
     return packages[:limit]
+
+
+def save_to_file(packages, file_name):
+    now = datetime.datetime.today()
+    with open(file_name, 'w') as f:
+        f.write(json.dumps({
+            'data': packages,
+            'last_update': now.strftime('%d %B %Y'),
+        }))
