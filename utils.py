@@ -63,7 +63,6 @@ def annotate_wheels(packages):
 
 def get_top_packages():
     print('Getting packages...')
-    # Reversing the list puts the most popular at the top.
     packages = req_rpc('top_packages')
     return [{'name': n, 'downloads': d} for n, d in packages]
 
