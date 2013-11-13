@@ -57,12 +57,18 @@ def annotate_wheels(packages):
         if generic_wheel:
             package['css_class'] = 'success'
             package['color'] = '#47a447'
+            package['icon'] = u'\u2713'  # Check mark
+            package['title'] = 'This package provides a generic wheel that should work everywhere.'
         elif has_wheel:
             package['css_class'] = 'warning'
             package['color'] = '#ed9c28'
+            package['icon'] = '?'
+            package['title'] = 'This package only has platform or achitecture-specific builds.'
         else:
             package['css_class'] = 'danger'
             package['color'] = '#d2322d'
+            package['icon'] = u'\u2717'  # Ballot X
+            package['title'] = 'This package has no wheel archives uploaded (yet!).'
 
 
 def get_top_packages():
