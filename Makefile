@@ -7,9 +7,9 @@ generate:
 	python generate.py
 
 update:
-	s3cmd put index.html s3://wheelofshame/index.html  --cf-invalidate \
+	s3cmd put index.html s3://wheelpackages/index.html  --cf-invalidate \
 	--add-header='Cache-Control: max-age=30' \
 	--add-header='Date: `date -u +"%a, %d %b %Y %H:%M:%S GMT"`'
-	s3cmd put results.json s3://wheelofshame/results.json  --cf-invalidate \
+	s3cmd put results.json s3://wheelpackages/results.json  --cf-invalidate \
 	--add-header='Cache-Control: max-age=30' \
 	--add-header='Date: `date -u +"%a, %d %b %Y %H:%M:%S GMT"`'
