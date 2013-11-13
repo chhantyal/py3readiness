@@ -23,8 +23,9 @@
                 var tbl_body = "";
                 $.each(data, function(i, v) {
                     var line = '<a class="btn btn-' + v['css_class'] +
-                               '" href="https://pypi.python.org/pypi/' + v['name'] + '">' +
-                                v['name'] + '</a>';
+                               '" href="https://pypi.python.org/pypi/' +
+                               v['name'] + '" title="' + v['title'] + '">' +
+                               v['name'] + ' ' + v['icon'] + '</a>';
                     tbl_body += line;
                 })
                 $(".list").html(tbl_body);
