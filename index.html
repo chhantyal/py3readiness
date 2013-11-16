@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript">
         $(function(){
@@ -11,13 +10,7 @@
                 console.log(response);
                 $("span.date").html(response['last_update']);
 
-                // Create doughnut
                 var data = response['data'];
-                var ctx = document.getElementById("wheel").getContext("2d");
-                new Chart(ctx).Doughnut(data, {
-                    animation: false,
-                    segmentShowStroke: false
-                });
 
                 // Populate table
                 var tbl_body = "";
@@ -51,8 +44,7 @@
         <div class="row">
             <div class="col-sm-6">
             <h1>Python Wheels</h1>
-                <canvas class="center-block" id="wheel" width="360" height="360"></canvas>
-                <object data="wheel.svg", type="image/svg+xml", width="380" height="380"></object>
+                <object data="wheel.svg" type="image/svg+xml" width="380" height="380" class="center-block"></object>
                 <h2>What are wheels?</h2>
                 <p><a href="https://pypi.python.org/pypi/wheel">Wheels</a> are <a href="http://www.python.org/dev/peps/pep-0427">the new standard</a> of python distribution and are intended to replace eggs. Among other advantages, they offer faster installation and allow secure digital signing. Support is offered in <code>pip &gt;= 1.4</code> and <code>setuptools &gt;= 0.8</code>.</p>
                 <h2>What is this list?</h2>

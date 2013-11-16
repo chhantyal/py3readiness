@@ -71,11 +71,33 @@ def generate_svg_wheel(packages, total):
     # Packages with some sort of wheel
     wheel_packages = len([1 for package in packages if package['wheel']])
 
-    wheels = et.SubElement(wheel, 'text',
-        x='190', y='190',
-        attrib = {'text-anchor': 'middle', 'font-size': '40', 'dominant-baseline': 'central'},
+    packages_with_wheels = et.SubElement(wheel, 'text',
+        x='190', y='170',
+        attrib = {
+            'text-anchor': 'middle',
+            'dominant-baseline': 'central',
+            'font-size': '40',
+            'font-family': '"Helvetica Neue",Helvetica,Arial,sans-serif',
+        },
     )
-    wheels.text='{}/{}'.format(wheel_packages, total)
+    packages_with_wheels.text='{}'.format(wheel_packages)
+
+    et.SubElement(wheel, 'line',
+        x1='150', y1='190',
+        x2='230', y2='190',
+        attrib = {'stroke': 'black', 'stroke-width': '2'},
+        )
+
+    total_packages = et.SubElement(wheel, 'text',
+        x='190', y='210',
+        attrib = {
+            'text-anchor': 'middle',
+            'dominant-baseline': 'central',
+            'font-size': '40',
+            'font-family': '"Helvetica Neue",Helvetica,Arial,sans-serif',
+        },
+    )
+    total_packages.text='{}'.format(total)
 
     with open('wheel.svg', 'w') as svg:
         add_headers(svg)
