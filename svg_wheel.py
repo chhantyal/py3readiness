@@ -78,6 +78,7 @@ def generate_svg_wheel(packages, total):
             'dominant-baseline': 'central',
             'font-size': '40',
             'font-family': '"Helvetica Neue",Helvetica,Arial,sans-serif',
+            'fill': '#333333',
         },
     )
     packages_with_wheels.text='{}'.format(wheel_packages)
@@ -85,7 +86,7 @@ def generate_svg_wheel(packages, total):
     et.SubElement(wheel, 'line',
         x1='150', y1='190',
         x2='230', y2='190',
-        attrib = {'stroke': 'black', 'stroke-width': '2'},
+        attrib = {'stroke': '#333333', 'stroke-width': '2'},
         )
 
     total_packages = et.SubElement(wheel, 'text',
@@ -95,6 +96,7 @@ def generate_svg_wheel(packages, total):
             'dominant-baseline': 'central',
             'font-size': '40',
             'font-family': '"Helvetica Neue",Helvetica,Arial,sans-serif',
+            'fill': '#333333',
         },
     )
     total_packages.text='{}'.format(total)
