@@ -89,7 +89,7 @@ def add_fraction(wheel, packages, total):
 
 
 def generate_svg_wheel(packages, total):
-    wheel = et.Element('svg', width='380', height='380', version='1.1', xmlns='http://www.w3.org/2000/svg')
+    wheel = et.Element('svg', viewBox='0 0 380 380', version='1.1', xmlns='http://www.w3.org/2000/svg')
 
     for index, result in enumerate(packages):
         start, stop = angles(index, total)
