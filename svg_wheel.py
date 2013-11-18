@@ -2,14 +2,21 @@ import math
 import xml.etree.ElementTree as et
 
 
+HEADERS = '''<?xml version=\"1.0\" standalone=\"no\"?>
+<?xml-stylesheet href="wheel.css" type="text/css"?>
+<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"
+\"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">
+'''
+
+PATH_TEMPLATE = '''
+M {start_outer_x},{start_outer_y}
+A{outer_radius},{outer_radius} 0 0 1 {end_outer_x},{end_outer_y}
+L {start_inner_x},{start_inner_y}
+A{inner_radius},{inner_radius} 0 0 0 {end_inner_x},{end_inner_y}
+Z
+'''
+
 TAU = 2*math.pi
-
-
-def add_headers(f):
-    f.write('<?xml version=\"1.0\" standalone=\"no\"?>\n')
-    f.write('<?xml-stylesheet href="wheel.css" type="text/css"?>')
-    f.write('<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n')
-    f.write('\"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n')
 
 
 def annular_sector_path(center_x, center_y, inner_radius, outer_radius, start, stop):
@@ -26,15 +33,7 @@ def annular_sector_path(center_x, center_y, inner_radius, outer_radius, start, s
         'end_inner_y': center_y + inner_radius*math.sin(start),
     }
 
-    path_d = ' '.join((
-        'M {start_outer_x},{start_outer_y}',
-        'A{outer_radius},{outer_radius} 0 0 1 {end_outer_x},{end_outer_y}',
-        'L {start_inner_x},{start_inner_y}',
-        'A{inner_radius},{inner_radius} 0 0 0 {end_inner_x},{end_inner_y}',
-        'Z',
-    ))
-
-    return path_d.format(**points)
+    return PATH_TEMPLATE.format(**points)
 
 
 def add_annular_sector(wheel, center, inner_radius, outer_radius, start, stop, style_class):
@@ -65,7 +64,7 @@ def add_fraction(wheel, packages, total):
         }
 
     # Packages with some sort of wheel
-    wheel_packages = len([1 for package in packages if package['wheel']])
+    wheel_packages = sum(package['wheel'] for package in packages)
 
     packages_with_wheels = et.SubElement(wheel, 'text',
         x='190', y='170',
@@ -106,6 +105,6 @@ def generate_svg_wheel(packages, total):
     add_fraction(wheel, packages, total)
 
     with open('wheel.svg', 'w') as svg:
-        add_headers(svg)
+        svg.write(HEADERS)
         svg.write(et.tostring(wheel))
 
