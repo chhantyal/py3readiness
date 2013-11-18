@@ -16,6 +16,11 @@ A{inner_radius},{inner_radius} 0 0 0 {end_inner_x},{end_inner_y}
 Z
 '''
 
+FRACTION_LINE = 80
+OFFSET = 20
+PADDING = 10
+RADIUS = 180
+CENTER = PADDING + RADIUS
 TAU = 2*math.pi
 
 
@@ -58,7 +63,7 @@ def add_fraction(wheel, packages, total):
     text_attributes = {
             'text-anchor': 'middle',
             'dominant-baseline': 'central',
-            'font-size': '40',
+            'font-size': str(2*OFFSET),
             'font-family': '"Helvetica Neue",Helvetica,Arial,sans-serif',
             'fill': '#333333',
         }
@@ -67,35 +72,35 @@ def add_fraction(wheel, packages, total):
     wheel_packages = sum(package['wheel'] for package in packages)
 
     packages_with_wheels = et.SubElement(wheel, 'text',
-        x='190', y='170',
+        x=str(CENTER), y=str(CENTER - OFFSET),
         attrib=text_attributes,
     )
     packages_with_wheels.text='{}'.format(wheel_packages)
 
     # Dividing line
     et.SubElement(wheel, 'line',
-        x1='150', y1='190',
-        x2='230', y2='190',
+        x1=str(CENTER - FRACTION_LINE//2), y1=str(CENTER),
+        x2=str(CENTER + FRACTION_LINE//2), y2=str(CENTER),
         attrib={'stroke': '#333333', 'stroke-width': '2'},
         )
 
     # Total packages
     total_packages = et.SubElement(wheel, 'text',
-        x='190', y='210',
+        x=str(CENTER), y=str(CENTER + OFFSET),
         attrib=text_attributes,
     )
     total_packages.text='{}'.format(total)
 
 
 def generate_svg_wheel(packages, total):
-    wheel = et.Element('svg', viewBox='0 0 380 380', version='1.1', xmlns='http://www.w3.org/2000/svg')
+    wheel = et.Element('svg', viewBox='0 0 {0} {0}'.format(2*CENTER), version='1.1', xmlns='http://www.w3.org/2000/svg')
 
     for index, result in enumerate(packages):
         start, stop = angles(index, total)
         sector = add_annular_sector(
             wheel,
-            center=(190, 190),
-            inner_radius=90, outer_radius=180,
+            center=(CENTER, CENTER),
+            inner_radius=RADIUS//2, outer_radius=RADIUS,
             start=start, stop=stop,
             style_class=result['css_class'],
         )
