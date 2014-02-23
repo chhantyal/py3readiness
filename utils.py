@@ -37,7 +37,6 @@ def annotate_wheels(packages):
     num_packages = len(packages)
     for index, package in enumerate(packages):
         print index + 1, num_packages, package['name']
-        generic_wheel = False
         has_wheel = False
         url = get_json_url(package['name'])
         response = SESSION.get(url)
@@ -48,25 +47,16 @@ def annotate_wheels(packages):
         for download in data['urls']:
             if download['packagetype'] == 'bdist_wheel':
                 has_wheel = True
-                generic_wheel = download['filename'].endswith('none-any.whl')
         package['wheel'] = has_wheel
-        package['generic_wheel'] = generic_wheel
 
         # Display logic. I know, I'm sorry.
         package['value'] = 1
-        if generic_wheel:
+        if has_wheel:
             package['css_class'] = 'success'
-            package['color'] = '#47a447'
             package['icon'] = u'\u2713'  # Check mark
-            package['title'] = 'This package provides a generic wheel that should work everywhere.'
-        elif has_wheel:
-            package['css_class'] = 'warning'
-            package['color'] = '#ed9c28'
-            package['icon'] = '?'
-            package['title'] = 'This package only has platform or achitecture-specific builds.'
+            package['title'] = 'This package provides a wheel.'
         else:
-            package['css_class'] = 'danger'
-            package['color'] = '#d2322d'
+            package['css_class'] = 'default'
             package['icon'] = u'\u2717'  # Ballot X
             package['title'] = 'This package has no wheel archives uploaded (yet!).'
 
