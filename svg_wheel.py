@@ -24,7 +24,8 @@ CENTER = PADDING + RADIUS
 TAU = 2*math.pi
 
 
-def annular_sector_path(center_x, center_y, inner_radius, outer_radius, start, stop):
+def annular_sector_path(
+        center_x, center_y, inner_radius, outer_radius, start, stop):
     points = {
         'inner_radius': inner_radius,
         'outer_radius': outer_radius,
@@ -41,8 +42,10 @@ def annular_sector_path(center_x, center_y, inner_radius, outer_radius, start, s
     return PATH_TEMPLATE.format(**points)
 
 
-def add_annular_sector(wheel, center, inner_radius, outer_radius, start, stop, style_class):
-    return et.SubElement(wheel, 'path',
+def add_annular_sector(
+        wheel, center, inner_radius, outer_radius, start, stop, style_class):
+    return et.SubElement(
+        wheel, 'path',
         d=annular_sector_path(
             center_x=center[0], center_y=center[1],
             inner_radius=inner_radius, outer_radius=outer_radius,
@@ -61,39 +64,47 @@ def angles(index, total):
 
 def add_fraction(wheel, packages, total):
     text_attributes = {
-            'text-anchor': 'middle',
-            'dominant-baseline': 'central',
-            'font-size': str(2*OFFSET),
-            'font-family': '"Helvetica Neue",Helvetica,Arial,sans-serif',
-            'fill': '#333333',
-        }
+        'text-anchor': 'middle',
+        'dominant-baseline': 'central',
+        'font-size': str(2*OFFSET),
+        'font-family': '"Helvetica Neue",Helvetica,Arial,sans-serif',
+        'fill': '#333333',
+    }
 
     # Packages with some sort of wheel
     wheel_packages = sum(package['wheel'] for package in packages)
 
-    packages_with_wheels = et.SubElement(wheel, 'text',
+    packages_with_wheels = et.SubElement(
+        wheel, 'text',
         x=str(CENTER), y=str(CENTER - OFFSET),
         attrib=text_attributes,
     )
-    packages_with_wheels.text='{}'.format(wheel_packages)
+    packages_with_wheels.text = '{}'.format(wheel_packages)
 
     # Dividing line
-    et.SubElement(wheel, 'line',
+    et.SubElement(
+        wheel, 'line',
         x1=str(CENTER - FRACTION_LINE//2), y1=str(CENTER),
         x2=str(CENTER + FRACTION_LINE//2), y2=str(CENTER),
         attrib={'stroke': '#333333', 'stroke-width': '2'},
-        )
+    )
 
     # Total packages
-    total_packages = et.SubElement(wheel, 'text',
+    total_packages = et.SubElement(
+        wheel, 'text',
         x=str(CENTER), y=str(CENTER + OFFSET),
         attrib=text_attributes,
     )
-    total_packages.text='{}'.format(total)
+    total_packages.text = '{}'.format(total)
 
 
 def generate_svg_wheel(packages, total):
-    wheel = et.Element('svg', viewBox='0 0 {0} {0}'.format(2*CENTER), version='1.1', xmlns='http://www.w3.org/2000/svg')
+    wheel = et.Element(
+        'svg',
+        viewBox='0 0 {0} {0}'.format(2*CENTER),
+        version='1.1',
+        xmlns='http://www.w3.org/2000/svg',
+    )
 
     for index, result in enumerate(packages):
         start, stop = angles(index, total)
@@ -112,4 +123,3 @@ def generate_svg_wheel(packages, total):
     with open('wheel.svg', 'w') as svg:
         svg.write(HEADERS)
         svg.write(et.tostring(wheel))
-
