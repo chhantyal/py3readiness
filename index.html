@@ -46,7 +46,15 @@
             <h1>Python Wheels</h1>
                 <object data="wheel.svg" type="image/svg+xml" width="380" height="380" class="center-block"></object>
                 <h2>What are wheels?</h2>
-                <p><a href="https://pypi.python.org/pypi/wheel">Wheels</a> are <a href="http://www.python.org/dev/peps/pep-0427">the new standard</a> of python distribution and are intended to replace eggs. Among other advantages, they offer faster installation and allow secure digital signing. Support is offered in <code>pip &gt;= 1.4</code> and <code>setuptools &gt;= 0.8</code>.</p>
+                <p><a href="https://pypi.python.org/pypi/wheel">Wheels</a> are <a href="http://www.python.org/dev/peps/pep-0427">the new standard</a> of python distribution and are intended to replace eggs. Support is offered in <code>pip &gt;= 1.4</code> and <code>setuptools &gt;= 0.8</code>.</p>
+                <h3>Advantages of wheels</h3>
+                <ol>
+                    <li>Faster installation for pure python and native C extension packages.</li>
+                    <li>Avoids arbitrary code execution for installation. (Avoids setup.py)</li>
+                    <li>Allows better caching for testing and continuous integration.</li>
+                    <li>Creates .pyc files as part of installation to ensure they match the python interpreter used.</li>
+                    <li>More consistent installs across platforms and machines.</li>
+                </ol>
                 <h2>What is this list?</h2>
                 <p>This site shows the top 360 most-downloaded packages on <a href="https://pypi.python.org/pypi">PyPI</a> showing which have been uploaded as wheel archives.</p>
                 <ul>
