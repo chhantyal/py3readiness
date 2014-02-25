@@ -79,7 +79,7 @@ def add_fraction(wheel, packages, total):
         x=str(CENTER), y=str(CENTER - OFFSET),
         attrib=text_attributes,
     )
-    packages_with_wheels.text = '{}'.format(wheel_packages)
+    packages_with_wheels.text = '{0}'.format(wheel_packages)
 
     # Dividing line
     et.SubElement(
@@ -95,7 +95,7 @@ def add_fraction(wheel, packages, total):
         x=str(CENTER), y=str(CENTER + OFFSET),
         attrib=text_attributes,
     )
-    total_packages.text = '{}'.format(total)
+    total_packages.text = '{0}'.format(total)
 
 
 def generate_svg_wheel(packages, total):
@@ -116,7 +116,7 @@ def generate_svg_wheel(packages, total):
             style_class=result['css_class'],
         )
         title = et.SubElement(sector, 'title')
-        title.text = u'{} {}'.format(result['name'], result['icon'])
+        title.text = u'{0} {1}'.format(result['name'], result['icon'])
 
     add_fraction(wheel, packages, total)
 
