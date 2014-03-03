@@ -13,15 +13,20 @@
                 var data = response['data'];
 
                 // Populate table
-                var tbl_body = "";
-                $.each(data, function(i, v) {
-                    var line = '<a class="btn btn-' + v['css_class'] +
+                var populate = function(data){
+                    var tbl_body = "";
+                    $.each(data, function(i, v) {
+                        var line = '<a class="btn btn-' + v['css_class'] +
                                '" href="https://pypi.python.org/pypi/' +
                                v['name'] + '" title="' + v['title'] + '">' +
                                v['name'] + ' ' + v['icon'] + '</a>';
-                    tbl_body += line;
-                })
-                $(".list").html(tbl_body);
+                        tbl_body += line;
+                    })
+                    return tbl_body;
+                }
+                $(".list-upto-120").html(populate(data.slice(0, 120)));
+                $(".list-upto-240").html(populate(data.slice(120, 240)));
+                $(".list-upto-360").html(populate(data.slice(240, 360)));
             };
             $.getJSON('results.json', json_success);
         });
@@ -37,13 +42,13 @@
         pre {text-align: left;}
         footer{text-align: center;}
     </style>
-    <title>Python Wheels</title>
+    <title>Python 3 Readiness - Python 3 support table for most popular Python packages</title>
 </head>
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">
-            <h1>Python Wheels</h1>
+            <div class="col-sm-12">
+                <h1>Python 3 Readiness</h1>
                 <object data="wheel.svg" type="image/svg+xml" width="380" height="380" class="center-block"></object>
                 <h2>What are wheels?</h2>
                 <p><a href="https://pypi.python.org/pypi/wheel">Wheels</a> are <a href="http://www.python.org/dev/peps/pep-0427">the new standard</a> of python distribution and are intended to replace eggs. Support is offered in <code>pip &gt;= 1.4</code> and <code>setuptools &gt;= 0.8</code>.</p>
@@ -83,16 +88,24 @@
                 <p><em>Note: </em>Requests for behavioural changes in the packaging tools themselves should be directed to <a href="https://mail.python.org/mailman/listinfo/distutils-sig">distutils-sig</a> and the <a href="https://github.com/pypa/packaging-problems">Python Packaging Authority</a>.</p>
                 <h2>Other resources</h2>
                 <p><a href="https://pypip.in/wheel.html">PyPI Pins</a> has a pin you can use to display your wheel compatibility: <img src="https://pypip.in/wheel/blackhole/badge.png" alt="Wheel Status"></p>
-                <h2>Thanks</h2>
-                <p>Thanks to the <a href="https://python3wos.appspot.com/">Python 3 Wall of Superpowers</a> for the concept and making their code open source, <a href="https://twitter.com/dstufft">Donald Stufft</a> for his help on IRC, <a href="https://twitter.com/jturnbull">James Turnbull</a> for the intro copy, and <a href="http://ghickman.co.uk/">George Hickman</a> for pointing me in the right direction as usual.</p>
-            </div>
-            <div class="col-sm-6">
-                <div class="list">pythonwheels.com requires javascript to be enabled to display the list of packages.</div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="list-upto-120">py3readiness.org requires javascript to be enabled to display the list of packages.</div>
+            </div>
+            <div class="col-sm-4">
+                <div class="list-upto-240"></div>
+            </div>
+            <div class="col-sm-4">
+                <div class="list-upto-360"></div>
+            </div>
+        </div>
+        <h2>Thanks</h2>
+            <p>Thanks to the <a href="https://python3wos.appspot.com/">Python 3 Wall of Superpowers</a> for the concept and making their code open source, <a href="https://twitter.com/dstufft">Donald Stufft</a> for his help on IRC, <a href="https://twitter.com/jturnbull">James Turnbull</a> for the intro copy, and <a href="http://ghickman.co.uk/">George Hickman</a> for pointing me in the right direction as usual.</p>
         <footer>
             <p>Written by <a href="http://meshy.co.uk/">meshy</a>, sponsored by <a href="http://incuna.com/">Incuna</a>, code on <a href="https://github.com/meshy/pythonwheels">Github</a>.</p>
-            <p>Last updated <span class="date"></span>. (Updated hourly.)</p>
+            <p>Last updated <span class="date"></span>. (Updated daily.)</p>
         </footer>
     </div>
     <script type="text/javascript">
