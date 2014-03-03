@@ -72,7 +72,7 @@ def add_fraction(wheel, packages, total):
     }
 
     # Packages with some sort of wheel
-    wheel_packages = sum(package['wheel'] for package in packages)
+    wheel_packages = sum(package['py3support'] for package in packages)
 
     packages_with_wheels = et.SubElement(
         wheel, 'text',
