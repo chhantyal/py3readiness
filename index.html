@@ -49,43 +49,26 @@
         <div class="row">
             <div class="col-sm-12">
                 <h1>Python 3 Readiness</h1>
-                <object data="wheel.svg" type="image/svg+xml" width="380" height="380" class="center-block"></object>
-                <h2>What are wheels?</h2>
-                <p><a href="https://pypi.python.org/pypi/wheel">Wheels</a> are <a href="http://www.python.org/dev/peps/pep-0427">the new standard</a> of python distribution and are intended to replace eggs. Support is offered in <code>pip &gt;= 1.4</code> and <code>setuptools &gt;= 0.8</code>.</p>
-                <h3>Advantages of wheels</h3>
+                <p class="text-center text-info">Python 3 support graph for 360 most popular Python packages!</p>
+                <object data="wheel.svg" type="image/svg+xml" width="430" height="430" class="center-block"></object>
+                <h2>What is this about?</h2>
+                <p>This site shows Python 3 support for 360 most downloaded packages on <a href="https://pypi.python.org/pypi">PyPI</a></p>
                 <ol>
-                    <li>Faster installation for pure python and native C extension packages.</li>
-                    <li>Avoids arbitrary code execution for installation. (Avoids setup.py)</li>
-                    <li>Installation of a C extension does not require a compiler on Windows or OS X.</li>
-                    <li>Allows better caching for testing and continuous integration.</li>
-                    <li>Creates .pyc files as part of installation to ensure they match the python interpreter used.</li>
-                    <li>More consistent installs across platforms and machines.</li>
+                    <li><span class="text-success">Green</span> packages support Python 3,</li>
+                    <li><span class="text-muted">White</span> packages don't support Python 3 yet.</li>
                 </ol>
-                <h2>What is this list?</h2>
-                <p>This site shows the top 360 most-downloaded packages on <a href="https://pypi.python.org/pypi">PyPI</a> showing which have been uploaded as wheel archives.</p>
-                <ul>
-                    <li><span class="text-success">Green</span> packages offer wheels,</li>
-                    <li><span class="text-muted">White</span> packages have no wheel archives uploaded (yet!).</li>
-                </ul>
-                <p>This is not the official website for wheels, just a nice visual way to measure adoption. To see the authoritative guide on wheels and other aspects of python packaging, see the <a href="https://packaging.python.org">Python Packaging User Guide</a>.</p>
-                <h2>My package is white. What can I do?</h2>
-                    <h3>Pure Python</h3>
-                    <p>If you have a pure python package that is not using 2to3 for Python 3 support, you've got it easy. Make sure Wheel is installed&hellip;</p>
-                        <pre>
-    pip install wheel</pre>
-                    <p>&hellip;and when you'd normally run <code>python setup.py sdist upload</code>, run instead <code>python setup.py sdist bdist_wheel upload</code>. For a more in-depth explanation, see this guide on <a href="https://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/">sharing your labor of love</a>.</p>
-                    <p><em>Note: </em>If your project is python 2 and 3 compatible you can create a universal wheel distribution. Create a file called <code>setup.cfg</code> with the following content and upload your package.</p>
-                        <pre>
-    [wheel]
-    universal = 1</pre>
-                        <p><strong>Warning: </strong>If your project has optional C extensions, it is recommended not to publish a universal wheel, because pip will prefer the wheel over a source installation.</p>
-                    <h3>C extensions</h3>
-                    <p>PyPI currently only allows uploading platform-specific wheels for Windows and Mac&nbsp;OS&nbsp;X. It is still useful to create wheels for these platforms, as it avoids the need for your users to compile the package when installing.</p>
-                    <p>You will need to have access to the platform you are building for.</p>
-                <h2>Something's wrong with this page!</h2>
-                <p>Fantastic, a problem found is a problem fixed. Please <a href="https://github.com/meshy/pythonwheels/issues/">create a ticket</a>!</p>
-                <p>You can also <a href="https://github.com/meshy/pythonwheels/pulls/">submit a pull-request</a>.</p>
-                <p><em>Note: </em>Requests for behavioural changes in the packaging tools themselves should be directed to <a href="https://mail.python.org/mailman/listinfo/distutils-sig">distutils-sig</a> and the <a href="https://github.com/pypa/packaging-problems">Python Packaging Authority</a>.</p>
+                <h2>Package 'x' is white. What can I do?</h2>
+                    <p>There can be many reasons a package is still not supporting Python 3.</p>
+                    <ul>
+                        <li>
+                            <p>If you are package maintainer, you can use many tools available to port to Python 3. If you are not able to give time needed to do porting, please seek for help from wider community by announcing on blog, IRC, mailing lists etc. There are often people wanting to contribute to open source projects.</p>
+                        </li>
+                        <li>
+                            <p>If you are user of the package, send friendly note to package maintainer. Or fork it, and send pull request.</p>
+                        </li>
+                    </ul>
+                <h2>How do you identify for Python 3 support?</h2>
+                <p>This site fully utilizes little tool, <a href="https://github.com/brettcannon/caniusepython3">caniusepython3</a> created by Brett Cannon. Throw your requirements.txt file at it and it will tell you which packages support Python 3, and list out which don't. </p>
             </div>
         </div>
         <div class="row">
@@ -115,9 +98,9 @@
             </div>
         </div>
         <h2>Thanks</h2>
-            <p>Thanks to the <a href="https://python3wos.appspot.com/">Python 3 Wall of Superpowers</a> for the concept and making their code open source, <a href="https://twitter.com/dstufft">Donald Stufft</a> for his help on IRC, <a href="https://twitter.com/jturnbull">James Turnbull</a> for the intro copy, and <a href="http://ghickman.co.uk/">George Hickman</a> for pointing me in the right direction as usual.</p>
+            <p>This is derivative work from <a href="http://pythonwheels.com/">Python Wheels</a>, a site that tracks progress in new Python package destribution standard called <a href="https://pypi.python.org/pypi/wheel">Wheels</a>. All the credits goes to <a href="http://meshy.co.uk/">meshy</a>.
         <footer>
-            <p>Written by <a href="http://meshy.co.uk/">meshy</a>, sponsored by <a href="http://incuna.com/">Incuna</a>, code on <a href="https://github.com/meshy/pythonwheels">Github</a>.</p>
+            <p>Curated by <a href="http://twitter.com/chhantyal">chhantyal</a>, source code on <a href="https://github.com/chhantyal/py3readiness">Github</a>.</p>
             <p>Last updated <span class="date"></span>. (Updated daily.)</p>
         </footer>
     </div>
