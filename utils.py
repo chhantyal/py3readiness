@@ -5,7 +5,7 @@ import xmlrpclib
 import pytz
 import requests
 
-from caniusepython3 import all_py3_projects
+from caniusepython3.pypi import all_py3_projects
 
 
 BASE_URL = 'http://pypi.python.org/pypi'
