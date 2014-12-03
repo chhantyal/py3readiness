@@ -5,6 +5,8 @@ import xmlrpclib
 import pytz
 import requests
 
+from flags import FLAGS
+
 from caniusepython3.pypi import all_py3_projects
 
 
@@ -62,6 +64,13 @@ def get_top_packages():
 
 def remove_irrelevant_packages(packages, limit):
     print('Removing cruft...')
+    added_limit = limit + len(FLAGS)
+    packages = packages[:added_limit]
+    
+    for index, package in enumerate(packages):
+        if package['name'] in FLAGS.keys():
+            del packages[index]
+
     return packages[:limit]
 
 
