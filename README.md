@@ -16,4 +16,4 @@ Please use issue tracker for issues, suggestions, feature requests and further e
 
 ## Credits
 
-This is derivative work from [Python Wheels](pythonwheels.com), a site that tracks progress in new Python package destribution standard called [Wheels](https://pypi.python.org/pypi/wheel). All the credits goes to [meshy](https://github.com/meshy).
+This is derivative work from [Python Wheels](pythonwheels.com), a site that tracks progress in new Python package distribution standard called [Wheels](https://pypi.python.org/pypi/wheel). All the credits goes to [meshy](https://github.com/meshy).
