@@ -5,8 +5,8 @@ from fabric.api import env, run, local, prefix, sudo
 
 def live():
     """Connects to the server."""
-    env.hosts = [os.environ.get('py3_hosts', 'u6.uhura.de')]
-    env.user = os.environ.get('py3_user', 'uhura')
+    env.hosts = ['py3readiness.org']
+    env.user = os.environ.get('py3_user', '')
     env.cwd = '/var/www/py3readiness.org'
     env.connect_to = '{0}@{1}:{2}'.format(env.user, env.hosts[0], env.cwd)
 
