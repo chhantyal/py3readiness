@@ -67,9 +67,7 @@ def remove_irrelevant_packages(packages, limit):
     added_limit = limit + len(FLAGS)
     packages = packages[:added_limit]
     
-    for package in packages:
-        if package['name'] in FLAGS.keys():
-            packages.remove(package)
+    packages = [package for package in packages if package.get('name') not in FLAGS.keys()]
 
     return packages[:limit]
 
