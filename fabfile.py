@@ -5,8 +5,8 @@ from fabric.api import env, run, local, prefix, sudo
 
 def live():
     """Connects to the server."""
-    env.hosts = [os.environ.get('py3_hosts')]
-    env.user = os.environ.get('py3_user')
+    env.hosts = [os.environ.get('py3_hosts', 'u6.uhura.de')]
+    env.user = os.environ.get('py3_user', 'uhura')
     env.cwd = '/var/www/py3readiness.org'
     env.connect_to = '{0}@{1}:{2}'.format(env.user, env.hosts[0], env.cwd)
 
@@ -30,7 +30,7 @@ def source_env():
 def install_requirements():
     """Installs requirements inside vertualenv"""
     with source_env():
-        run('pip install -r requirements.txt')
+        run('pip install --force-reinstall -Ur requirements.txt')
 
 
 def generate():
@@ -40,9 +40,7 @@ def generate():
 
 
 def update(tag=None):
-    """
-    Updates changes in server (might restart webserver)
-    """
+    """Updates changes in server (might restart webserver)"""
     gitpull()
     install_requirements()
     generate()
