@@ -4,9 +4,10 @@ libs with large download stat which are not really used by community. See issue 
 """
 
 FLAGS = {
-    "rackspace-novaclient":"https://github.com/rackerlabs/rackspace-novaclient",
-    "mozrunner":"https://pypi.python.org/pypi/mozrunner",
-    "moznetwork":"https://pypi.python.org/pypi/moznetwork",
+    "rackspace-novaclient": "https://github.com/rackerlabs/rackspace-novaclient",
+    "manifestparser": "https://pypi.python.org/pypi/manifestparser",
+    "mozrunner": "https://pypi.python.org/pypi/mozrunner",
+    "moznetwork": "https://pypi.python.org/pypi/moznetwork",
     "mozdevice": "https://pypi.python.org/pypi/mozdevice",
     "mozprofile": "https://pypi.python.org/pypi/mozprofile",
     "mozprocess": "https://pypi.python.org/pypi/mozprocess",
