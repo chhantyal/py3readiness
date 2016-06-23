@@ -10,7 +10,7 @@ from flags import FLAGS
 from caniusepython3.pypi import all_py3_projects
 
 
-BASE_URL = 'http://pypi.python.org/pypi'
+BASE_URL = 'https://pypi.python.org/pypi'
 
 
 SESSION = requests.Session()
