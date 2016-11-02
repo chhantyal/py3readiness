@@ -1,3 +1,2 @@
-pytz
 requests
 caniusepython3 == 3.4.1
