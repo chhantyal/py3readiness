@@ -1,5 +1,5 @@
-from svg_wheel import generate_svg_wheel
-from utils import (
+from src.svg_wheel import generate_svg_wheel
+from src.utils import (
     annotate_wheels,
     get_top_packages,
     remove_irrelevant_packages,
