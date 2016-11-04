@@ -1,14 +1,11 @@
+import boto3
 import datetime
 import json
-import xmlrpclib
-
-import boto3
 import requests
-
-from flags import FLAGS
-
+import xmlrpclib
 from caniusepython3.pypi import all_py3_projects
 
+from src.flags import FLAGS
 
 BASE_URL = 'https://pypi.python.org/pypi'
 
@@ -84,4 +81,5 @@ def save_to_file(packages):
             'last_update': now.strftime('%A, %d %B %Y, %X %Z'),
         }))
     bucket = 'uhura.de.public'
-    s3_client.upload_file(tmp_path, bucket, key)
+    extra_args = extra_args={'ContentType': "application/json"}
+    s3_client.upload_file(tmp_path, bucket, key, extra_args)

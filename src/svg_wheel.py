@@ -130,4 +130,5 @@ def generate_svg_wheel(packages, total):
 
     bucket = 'uhura.de.public'
     key = 'wheel.svg'
-    s3_client.upload_file(tmp_wheel_path, bucket, key)
+    extra_args = {'ContentType': "image/svg+xml"}
+    s3_client.upload_file(tmp_wheel_path, bucket, key, extra_args=extra_args)
