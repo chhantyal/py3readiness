@@ -10,10 +10,10 @@ from utils import (
 TO_CHART = 360
 
 
-def main():
+def main(*args):
     packages = remove_irrelevant_packages(get_top_packages(), TO_CHART)
     annotate_wheels(packages)
-    save_to_file(packages, 'results.json')
+    save_to_file(packages)
     generate_svg_wheel(packages, TO_CHART)
 
 

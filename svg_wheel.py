@@ -1,6 +1,9 @@
 import math
 import xml.etree.ElementTree as et
 
+import boto3
+
+s3_client = boto3.client('s3')
 
 HEADERS = '''<?xml version=\"1.0\" standalone=\"no\"?>
 <?xml-stylesheet href="wheel.css" type="text/css"?>
@@ -120,6 +123,11 @@ def generate_svg_wheel(packages, total):
 
     add_fraction(wheel, packages, total)
 
-    with open('wheel.svg', 'w') as svg:
+    tmp_wheel_path = '/tmp/wheel.svg'
+    with open(tmp_wheel_path, 'w') as svg:
         svg.write(HEADERS)
         svg.write(et.tostring(wheel))
+
+    bucket = 'uhura.de.public'
+    key = 'wheel.svg'
+    s3_client.upload_file(tmp_wheel_path, bucket, key)

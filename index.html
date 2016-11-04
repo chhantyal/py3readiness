@@ -28,7 +28,7 @@
                 $(".list-upto-240").html(populate(data.slice(120, 240)));
                 $(".list-upto-360").html(populate(data.slice(240, 360)));
             };
-            $.getJSON('results.json', json_success);
+            $.getJSON('https://s3.eu-central-1.amazonaws.com/uhura.de.public/results.json', json_success);
         });
     </script>
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
@@ -50,7 +50,7 @@
             <div class="col-sm-12">
                 <h1>Python 3 Readiness</h1>
                 <p class="text-center text-info">Python 3 support graph for 360 most popular Python packages!</p>
-                <object data="wheel.svg" type="image/svg+xml" width="430" height="430" class="center-block"></object>
+                <object data="https://s3.eu-central-1.amazonaws.com/uhura.de.public/wheel.svg" type="image/svg+xml" width="430" height="430" class="center-block"></object>
                 <h2>What is this about?</h2>
                 <p>This site shows Python 3 support for 360 most downloaded packages on <a href="https://pypi.python.org/pypi">PyPI</a></p>
                 <ol>

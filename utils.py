@@ -2,6 +2,7 @@ import datetime
 import json
 import xmlrpclib
 
+import boto3
 import requests
 
 from flags import FLAGS
@@ -11,6 +12,7 @@ from caniusepython3.pypi import all_py3_projects
 
 BASE_URL = 'https://pypi.python.org/pypi'
 
+s3_client = boto3.client('s3')
 
 SESSION = requests.Session()
 
@@ -35,6 +37,7 @@ def get_json_url(package_name):
     return BASE_URL + '/' + package_name + '/json'
 
 py3_packages = all_py3_projects()
+
 
 def annotate_wheels(packages):
     print('Getting package data...')
@@ -71,10 +74,14 @@ def remove_irrelevant_packages(packages, limit):
     return packages[:limit]
 
 
-def save_to_file(packages, file_name):
+def save_to_file(packages):
     now = datetime.datetime.now()
-    with open(file_name, 'w') as f:
+    key = 'results.json'
+    tmp_path = '/tmp/{0}'.format(key)
+    with open(tmp_path, 'w') as f:
         f.write(json.dumps({
             'data': packages,
             'last_update': now.strftime('%A, %d %B %Y, %X %Z'),
         }))
+    bucket = 'uhura.de.public'
+    s3_client.upload_file(tmp_path, bucket, key)
