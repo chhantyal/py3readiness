@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript">
         $(function(){
@@ -41,16 +42,17 @@
         a.btn:last-child{border-bottom-width: 1px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;}
         pre {text-align: left;}
         footer{text-align: center;}
+        .center-block {max-height: 450px}
     </style>
     <title>Python 3 Readiness - Python 3 support table for most popular Python packages</title>
 </head>
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-12 col-md-12">
                 <h1>Python 3 Readiness</h1>
                 <p class="text-center text-info">Python 3 support graph for 360 most popular Python packages!</p>
-                <object data="https://s3.eu-central-1.amazonaws.com/uhura.de.public/wheel.svg" type="image/svg+xml" width="430" height="430" class="center-block"></object>
+                <object data="https://s3.eu-central-1.amazonaws.com/uhura.de.public/wheel.svg" type="image/svg+xml" class="center-block"></object>
                 <h2>What is this about?</h2>
                 <p>This site shows Python 3 support for 360 most downloaded packages on <a href="https://pypi.python.org/pypi">PyPI</a></p>
                 <ol>
@@ -74,7 +76,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-4 col-md-4">
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h3 class="panel-title text-center"><span class="glyphicon glyphicon-list"></span> Top 120</h3>
@@ -82,7 +84,7 @@
                 </div>
                 <div class="list-upto-120">py3readiness.org requires javascript to be enabled to display the list of packages.</div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4 col-md-4">
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h3 class="panel-title text-center"><span class="glyphicon glyphicon-list"></span> Top 120 - 240</h3>
@@ -90,7 +92,7 @@
                 </div>
                 <div class="list-upto-240"></div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4 col-md-4">
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h3 class="panel-title text-center"><span class="glyphicon glyphicon-list"></span> Top 240 - 360</h3>

@@ -17,13 +17,13 @@ Please use issue tracker for issues, suggestions, feature requests and further e
 
 ## How does the site work?
 
-The site works by checking PyPi periodically (currently daily).
+The site works by checking PyPi periodically (currently daily).  
 Script `generate.py` is run daily which generates JSON and updates date and time. 
 
-For almost a year, the site was running on very low resource VPS with nginx as web server.
+For almost a year, the site was running on very low resource VPS with nginx as web server.  
 Daily update was done via cron job in same machine.
 
-Currently, `generate.py` function is run on AWS Lambda. 
+Currently, `generate.py` function is run on AWS Lambda.   
 It saves output JSON file to S3 which is used to build graph. Site itself is hosted on Github Pages.
 
 ## Credits
