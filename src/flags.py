@@ -18,5 +18,6 @@ FLAGS = {
     "mozhttpd": "https://pypi.python.org/pypi/mozhttpd",
     "moztest": "https://pypi.python.org/pypi/moztest",
     "mozversion": "https://pypi.python.org/pypi/mozversion",
+    "marionette_client": "https://pypi.python.org/pypi/marionette_client",
     "marionette-transport": "https://pypi.python.org/pypi/marionette-transport",
 }
