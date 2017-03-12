@@ -26,6 +26,16 @@ Daily update was done via cron job in same machine.
 Currently, `generate.py` function is run on AWS Lambda.   
 It saves output JSON file to S3 which is used to build graph. Site itself is hosted on Github Pages.
 
+## Deploy
+
+AWS Lambda needs all dependencies as zip file along with codebase. 
+
+1.  `zip -r app.zip generate.py src/`
+2. `cd path/to/site-packages/`
+3. `zip -r app.zip *`
+
+Finally, upload the app.zip file and update version.
+
 ## Credits
 
 This is derivative work from [Python Wheels](pythonwheels.com), a site that tracks progress in new Python package distribution standard called [Wheels](https://pypi.python.org/pypi/wheel). All the credits goes to [meshy](https://github.com/meshy).
