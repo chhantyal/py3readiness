@@ -28,18 +28,60 @@
                 $(".list-upto-120").html(populate(data.slice(0, 120)));
                 $(".list-upto-240").html(populate(data.slice(120, 240)));
                 $(".list-upto-360").html(populate(data.slice(240, 360)));
+
+                handle_css();
             };
-            $.getJSON('https://s3.eu-central-1.amazonaws.com/uhura.de.public/results.json', json_success);
+
+            function handle_css(){
+                var ids = [".list-upto-120", ".list-upto-240", ".list-upto-360"]
+
+                $.each(ids, function(idx, id) {
+
+                    var $items = $(id),
+                        $visible = $items.find(":visible"),
+                        $first = $visible.first(),
+                        $last = $visible.last();
+
+                    $items.find(".btn-last-child").removeClass("btn-last-child");
+                    $items.find(".btn-first-child").removeClass("btn-first-child");
+                    $first.addClass("btn-first-child");
+                    $last.addClass("btn-last-child");
+
+                });
+            };
+
+            function show_hide_py3(){
+                var $this = $(this),
+                    $items = $(".btn-success"),
+                    currentState = $this.data("state") || "Show",
+                    nextState = currentState == "Show" ? "Hide" : "Show",
+                    buttonText = currentState + " Python 3 Ready";
+
+                if (currentState === "Show")
+                    $items.hide();
+                else
+                    $items.show();
+
+                $this.data("state", nextState);
+                $this.text(buttonText);
+
+                handle_css();
+            };
+            
+            $(document).ready(function() {
+                $.getJSON('https://s3.eu-central-1.amazonaws.com/uhura.de.public/results.json', json_success);
+                $("#show-hide-py3").click(show_hide_py3);
+            });
         });
     </script>
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body{margin-top:15px;}
         a.btn, h1{text-align: center;}
-        a.btn:last-child, canvas, body{margin-bottom:15px;}
+        a.btn-last-child, canvas, body{margin-bottom:15px;}
         a.btn {border-bottom-width: 0; border-radius: 0; width: 100%}
-        a.btn:first-child{border-top-left-radius: 5px; border-top-right-radius: 5px;}
-        a.btn:last-child{border-bottom-width: 1px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;}
+        a.btn-first-child{border-top-left-radius: 5px; border-top-right-radius: 5px;}
+        a.btn-last-child{border-bottom-width: 1px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;}
         pre {text-align: left;}
         footer{text-align: center;}
         .center-block {max-height: 450px}
@@ -75,6 +117,13 @@
                 </p>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-sm-4 col-md-4">
+                <a id="show-hide-py3" href="javascript:void(0)" class="btn btn-default btn-first-child btn-last-child">Hide Python 3 Ready</a>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-sm-4 col-md-4">
                 <div class="panel panel-info">
