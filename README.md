@@ -24,7 +24,7 @@ For almost a year, the site was running on very low resource VPS with nginx as w
 Daily update was done via cron job in same machine.
 
 Currently, `generate.py` function is run on AWS Lambda.   
-It saves output JSON file to S3 which is used to build graph. Site itself is hosted on Github Pages.
+It saves output JSON file to S3 which is used to build graph. Site itself is hosted on GitHub Pages.
 
 ## Deploy
 
