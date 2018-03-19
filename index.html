@@ -67,9 +67,8 @@
 
                 handle_css();
             };
-            
             $(document).ready(function() {
-                $.getJSON('https://s3.eu-central-1.amazonaws.com/uhura.de.public/results.json', json_success);
+                $.getJSON('https://s3.eu-central-1.amazonaws.com/py3readiness/results.json', json_success);
                 $("#show-hide-py3").click(show_hide_py3);
             });
         });

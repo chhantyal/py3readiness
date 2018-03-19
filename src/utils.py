@@ -31,6 +31,7 @@ def req_rpc(method, *args):
 def get_json_url(package_name):
     return BASE_URL + '/' + package_name + '/json'
 
+
 py3_packages = all_py3_projects()
 
 
@@ -38,7 +39,7 @@ def annotate_wheels(packages):
     print('Getting package data...')
     num_packages = len(packages)
     for index, package in enumerate(packages):
-        print index + 1, num_packages, package['name']
+        print(index + 1, num_packages, package['name'])
 
         package['value'] = 1
         if package['name'].lower() in py3_packages:
