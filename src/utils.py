@@ -36,7 +36,7 @@ def annotate_wheels(packages):
     print('Getting package data...')
     num_packages = len(packages)
     for index, package in enumerate(packages):
-        print index + 1, num_packages, package['name']
+        print(index + 1, num_packages, package['name'])
 
         package['value'] = 1
         if caniusepython3.check(projects=[package['name']]):

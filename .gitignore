@@ -5,3 +5,4 @@ include/
 bin/
 lib/
 .idea/
+.DS_Store
