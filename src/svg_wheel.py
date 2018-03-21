@@ -2,7 +2,7 @@ import math
 import copy
 import xml.etree.ElementTree as et
 
-from src.conf import s3_client, bucket, metadata
+from src.storage import s3_client, bucket, metadata
 
 HEADERS = '''<?xml version=\"1.0\" standalone=\"no\"?>
 <?xml-stylesheet href="wheel.css" type="text/css"?>

@@ -26,6 +26,13 @@ Daily update was done via cron job in same machine.
 Currently, `generate.py` function is run on AWS Lambda.   
 It saves output JSON file to S3 which is used to build graph. Site itself is hosted on GitHub Pages.
 
+## Local
+
+Output (`results.json`, `wheel.svg`, `wheel.css`) are uploaded to S3. You need to configure `aws-cli`
+
+1. `aws configure`
+2. `python generate.py`
+
 ## Deploy
 
 AWS Lambda needs all dependencies as zip file along with codebase. 

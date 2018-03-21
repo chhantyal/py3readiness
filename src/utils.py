@@ -6,10 +6,11 @@ import xmlrpclib
 import caniusepython3
 import requests
 
-from src.conf import BASE_URL, bucket, metadata, s3_client
+from src.storage import bucket, metadata, s3_client
 from src.flags import FLAGS
 
 SESSION = requests.Session()
+BASE_URL = 'https://pypi.python.org/pypi'
 
 
 def req_rpc(method, *args):

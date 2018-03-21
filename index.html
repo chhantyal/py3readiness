@@ -69,7 +69,7 @@
             };
             
             $(document).ready(function() {
-                $.getJSON('https://s3.eu-central-1.amazonaws.com/uhura.de.public/results.json', json_success);
+                $.getJSON('https://s3.eu-central-1.amazonaws.com/py3readiness/results.json', json_success);
                 $("#show-hide-py3").click(show_hide_py3);
             });
         });
@@ -94,7 +94,7 @@
             <div class="col-sm-12 col-md-12">
                 <h1>Python 3 Readiness</h1>
                 <p class="text-center text-info">Python 3 support graph for 360 most popular Python packages!</p>
-                <object data="https://s3.eu-central-1.amazonaws.com/uhura.de.public/wheel.svg" type="image/svg+xml" class="center-block"></object>
+                <object data="https://s3.eu-central-1.amazonaws.com/py3readiness/wheel.svg" type="image/svg+xml" class="center-block"></object>
                 <h2>What is this about?</h2>
                 <p>This site shows Python 3 support for 360 most downloaded packages on <a href="https://pypi.python.org/pypi">PyPI</a></p>
                 <ol>
