@@ -1,13 +1,13 @@
+import copy
 import datetime
 import json
-import copy
-import requests
 import xmlrpclib
 
-from caniusepython3.pypi import all_py3_projects
+import caniusepython3
+import requests
 
+from src.conf import BASE_URL, bucket, metadata, s3_client
 from src.flags import FLAGS
-from src.conf import bucket, s3_client, metadata, BASE_URL
 
 SESSION = requests.Session()
 
@@ -31,17 +31,15 @@ def req_rpc(method, *args):
 def get_json_url(package_name):
     return BASE_URL + '/' + package_name + '/json'
 
-py3_packages = all_py3_projects()
-
 
 def annotate_wheels(packages):
     print('Getting package data...')
     num_packages = len(packages)
     for index, package in enumerate(packages):
-        print index + 1, num_packages, package['name']
+        print(index + 1, num_packages, package['name'])
 
         package['value'] = 1
-        if package['name'].lower() in py3_packages:
+        if caniusepython3.check(projects=[package['name']]):
             package['py3support'] = True
             package['css_class'] = 'success'
             package['icon'] = u'\u2713'  # Check mark
@@ -63,7 +61,7 @@ def remove_irrelevant_packages(packages, limit):
     print('Removing cruft...')
     added_limit = limit + len(FLAGS)
     packages = packages[:added_limit]
-    
+
     packages = [package for package in packages if package.get('name') not in FLAGS.keys()]
 
     return packages[:limit]

@@ -1,2 +1,3 @@
+boto3
+caniusepython3==6.0.0
 requests
-caniusepython3 == 3.4.1
