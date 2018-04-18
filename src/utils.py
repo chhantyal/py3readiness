@@ -7,7 +7,7 @@ import caniusepython3
 from src.storage import bucket, metadata, s3_client
 from src.flags import FLAGS
 
-BASE_URL = 'https://pypi.python.org/pypi'
+BASE_URL = 'https://pypi.org/pypi'
 
 
 def get_json_url(package_name):
