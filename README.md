@@ -45,4 +45,4 @@ Finally, upload the app.zip file and update version.
 
 ## Credits
 
-This is derivative work from [Python Wheels](https://pythonwheels.com), a site that tracks progress in new Python package distribution standard called [Wheels](https://pypi.python.org/pypi/wheel). All the credits goes to [meshy](https://github.com/meshy).
+This is derivative work from [Python Wheels](https://pythonwheels.com), a site that tracks progress in new Python package distribution standard called [Wheels](https://pypi.org/project/wheel/). All the credits goes to [meshy](https://github.com/meshy).

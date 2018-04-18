@@ -10,7 +10,7 @@ from src.storage import bucket, metadata, s3_client
 from src.flags import FLAGS
 
 SESSION = requests.Session()
-BASE_URL = 'https://pypi.python.org/pypi'
+BASE_URL = 'https://pypi.org/pypi'
 
 
 def req_rpc(method, *args):
