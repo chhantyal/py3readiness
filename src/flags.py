@@ -1,6 +1,7 @@
 """
-It contains all the projects that can be ignored in graph. For example, there are many Mozilla 
-libs with large download stat which are not really used by community. See issue #22
+It contains all the projects that can be ignored in graph. For example, there
+are many Mozilla libs with large download stat which are not really used by
+community. See issue #22
 """
 
 FLAGS = {
