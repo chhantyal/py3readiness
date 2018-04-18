@@ -5,7 +5,8 @@ community. See issue #22
 """
 
 FLAGS = {
-    "rackspace-novaclient": "https://github.com/rackerlabs/rackspace-novaclient",
+    "rackspace-novaclient":
+        "https://github.com/rackerlabs/rackspace-novaclient",
     "manifestparser": "https://pypi.python.org/pypi/manifestparser",
     "mozrunner": "https://pypi.python.org/pypi/mozrunner",
     "moznetwork": "https://pypi.python.org/pypi/moznetwork",
@@ -20,5 +21,6 @@ FLAGS = {
     "moztest": "https://pypi.python.org/pypi/moztest",
     "mozversion": "https://pypi.python.org/pypi/mozversion",
     "marionette_client": "https://pypi.python.org/pypi/marionette_client",
-    "marionette-transport": "https://pypi.python.org/pypi/marionette-transport",
+    "marionette-transport":
+        "https://pypi.python.org/pypi/marionette-transport",
 }

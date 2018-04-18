@@ -134,6 +134,7 @@ def generate_svg_wheel(packages, total):
     extra_args["ContentType"] = "image/svg+xml"
 
     try:
-        s3_client.upload_file(tmp_wheel_path, bucket, key, ExtraArgs=extra_args)
+        s3_client.upload_file(tmp_wheel_path, bucket, key,
+                              ExtraArgs=extra_args)
     except Exception as e:
         print(e)
