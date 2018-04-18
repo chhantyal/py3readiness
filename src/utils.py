@@ -10,7 +10,7 @@ from src.storage import bucket, metadata, s3_client
 from src.flags import FLAGS
 
 SESSION = requests.Session()
-BASE_URL = 'https://pypi.python.org/pypi'
+BASE_URL = 'https://pypi.org/pypi'
 
 
 def req_rpc(method, *args):
@@ -63,7 +63,8 @@ def remove_irrelevant_packages(packages, limit):
     added_limit = limit + len(FLAGS)
     packages = packages[:added_limit]
 
-    packages = [package for package in packages if package.get('name') not in FLAGS.keys()]
+    packages = [package for package in packages
+                if package.get('name') not in FLAGS.keys()]
 
     return packages[:limit]
 
@@ -81,4 +82,7 @@ def save_to_file(packages):
     extra_args = copy.deepcopy(metadata)
     extra_args["ContentType"] = "application/json"
 
-    s3_client.upload_file(tmp_path, bucket, key, ExtraArgs=extra_args)
+    try:
+        s3_client.upload_file(tmp_path, bucket, key, ExtraArgs=extra_args)
+    except Exception as e:
+        print(e)
