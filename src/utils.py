@@ -82,4 +82,7 @@ def save_to_file(packages):
     extra_args = copy.deepcopy(metadata)
     extra_args["ContentType"] = "application/json"
 
-    s3_client.upload_file(tmp_path, bucket, key, ExtraArgs=extra_args)
+    try:
+        s3_client.upload_file(tmp_path, bucket, key, ExtraArgs=extra_args)
+    except Exception as e:
+        print(e)
