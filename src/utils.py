@@ -1,32 +1,13 @@
 import copy
 import datetime
 import json
-import xmlrpclib
 
 import caniusepython3
-import requests
 
 from src.storage import bucket, metadata, s3_client
 from src.flags import FLAGS
 
-SESSION = requests.Session()
 BASE_URL = 'https://pypi.python.org/pypi'
-
-
-def req_rpc(method, *args):
-    payload = xmlrpclib.dumps(args, method)
-
-    response = SESSION.post(
-        BASE_URL,
-        data=payload,
-        headers={'Content-Type': 'text/xml'},
-    )
-    if response.status_code == 200:
-        result = xmlrpclib.loads(response.content)[0][0]
-        return result
-    else:
-        # Some error occurred
-        pass
 
 
 def get_json_url(package_name):
@@ -54,8 +35,16 @@ def annotate_wheels(packages):
 
 def get_top_packages():
     print('Getting packages...')
-    packages = req_rpc('top_packages')
-    return [{'name': n, 'downloads': d} for n, d in packages]
+
+    with open('top-pypi-packages.json') as data_file:
+        packages = json.load(data_file)['rows']
+
+    # Rename keys
+    for package in packages:
+        package['downloads'] = package.pop('download_count')
+        package['name'] = package.pop('project')
+
+    return packages
 
 
 def remove_irrelevant_packages(packages, limit):

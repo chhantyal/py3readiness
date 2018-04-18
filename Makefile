@@ -4,6 +4,7 @@ help:
 	@echo "make update   -- upload the json and index.html to s3"
 
 generate:
+	wget https://hugovk.github.io/top-pypi-packages/top-pypi-packages-365-days.min.json -O top-pypi-packages.json
 	python generate.py
 
 update:
