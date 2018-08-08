@@ -6,7 +6,7 @@ community. See issue #22
 
 FLAGS = {
     "rackspace-novaclient":
-        "https://github.com/rackerlabs/rackspace-novaclient",
+    "https://github.com/rackerlabs/rackspace-novaclient",
     "manifestparser": "https://pypi.org/project/manifestparser",
     "mozrunner": "https://pypi.org/project/mozrunner",
     "moznetwork": "https://pypi.org/project/moznetwork",
