@@ -1,6 +1,5 @@
 *.py[cod]
 pip-selfcheck.json
-top-pypi-packages.json
 .Python
 include/
 bin/

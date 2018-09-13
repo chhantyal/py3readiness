@@ -124,7 +124,7 @@ def generate_svg_wheel(packages, total):
 
     add_fraction(wheel, packages, total)
 
-    tmp_wheel_path = '/tmp/wheel.svg'
+    tmp_wheel_path = './wheel.svg'
     with open(tmp_wheel_path, 'wb') as svg:
         svg.write(HEADERS)
         svg.write(et.tostring(wheel))

@@ -36,7 +36,7 @@ def annotate_wheels(packages):
 def get_top_packages():
     print('Getting packages...')
 
-    with open('top-pypi-packages.json') as data_file:
+    with open('data.json') as data_file:
         packages = json.load(data_file)['rows']
 
     # Rename keys
@@ -61,7 +61,7 @@ def remove_irrelevant_packages(packages, limit):
 def save_to_file(packages):
     now = datetime.datetime.now()
     key = 'results.json'
-    tmp_path = '/tmp/{0}'.format(key)
+    tmp_path = './{0}'.format(key)
     with open(tmp_path, 'w') as f:
         f.write(json.dumps({
             'data': packages,
