@@ -1,32 +1,13 @@
 import copy
 import datetime
 import json
-import xmlrpclib
 
 import caniusepython3
-import requests
 
 from src.storage import bucket, metadata, s3_client
 from src.flags import FLAGS
 
-SESSION = requests.Session()
-BASE_URL = 'https://pypi.python.org/pypi'
-
-
-def req_rpc(method, *args):
-    payload = xmlrpclib.dumps(args, method)
-
-    response = SESSION.post(
-        BASE_URL,
-        data=payload,
-        headers={'Content-Type': 'text/xml'},
-    )
-    if response.status_code == 200:
-        result = xmlrpclib.loads(response.content)[0][0]
-        return result
-    else:
-        # Some error occurred
-        pass
+BASE_URL = 'https://pypi.org/pypi'
 
 
 def get_json_url(package_name):
@@ -54,8 +35,16 @@ def annotate_wheels(packages):
 
 def get_top_packages():
     print('Getting packages...')
-    packages = req_rpc('top_packages')
-    return [{'name': n, 'downloads': d} for n, d in packages]
+
+    with open('data.json') as data_file:
+        packages = json.load(data_file)['rows']
+
+    # Rename keys
+    for package in packages:
+        package['downloads'] = package.pop('download_count')
+        package['name'] = package.pop('project')
+
+    return packages
 
 
 def remove_irrelevant_packages(packages, limit):
@@ -63,7 +52,8 @@ def remove_irrelevant_packages(packages, limit):
     added_limit = limit + len(FLAGS)
     packages = packages[:added_limit]
 
-    packages = [package for package in packages if package.get('name') not in FLAGS.keys()]
+    packages = [package for package in packages
+                if package.get('name') not in FLAGS.keys()]
 
     return packages[:limit]
 
@@ -71,7 +61,7 @@ def remove_irrelevant_packages(packages, limit):
 def save_to_file(packages):
     now = datetime.datetime.now()
     key = 'results.json'
-    tmp_path = '/tmp/{0}'.format(key)
+    tmp_path = './{0}'.format(key)
     with open(tmp_path, 'w') as f:
         f.write(json.dumps({
             'data': packages,
@@ -81,4 +71,7 @@ def save_to_file(packages):
     extra_args = copy.deepcopy(metadata)
     extra_args["ContentType"] = "application/json"
 
-    s3_client.upload_file(tmp_path, bucket, key, ExtraArgs=extra_args)
+    try:
+        s3_client.upload_file(tmp_path, bucket, key, ExtraArgs=extra_args)
+    except Exception as e:
+        print(e)

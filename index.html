@@ -18,7 +18,7 @@
                     var tbl_body = "";
                     $.each(data, function(i, v) {
                         var line = '<a class="btn btn-' + v['css_class'] +
-                               '" href="https://pypi.python.org/pypi/' +
+                               '" href="https://pypi.org/project/' +
                                v['name'] + '" title="' + v['title'] + '">' +
                                v['name'] + ' ' + v['icon'] + '</a>';
                         tbl_body += line;
@@ -69,7 +69,7 @@
             };
             
             $(document).ready(function() {
-                $.getJSON('https://s3.eu-central-1.amazonaws.com/py3readiness/results.json', json_success);
+                $.getJSON('results.json', json_success);
                 $("#show-hide-py3").click(show_hide_py3);
             });
         });
@@ -94,9 +94,9 @@
             <div class="col-sm-12 col-md-12">
                 <h1>Python 3 Readiness</h1>
                 <p class="text-center text-info">Python 3 support graph for 360 most popular Python packages!</p>
-                <object data="https://s3.eu-central-1.amazonaws.com/py3readiness/wheel.svg" type="image/svg+xml" class="center-block"></object>
+                <object data="wheel.svg" type="image/svg+xml" class="center-block"></object>
                 <h2>What is this about?</h2>
-                <p>This site shows Python 3 support for 360 most downloaded packages on <a href="https://pypi.python.org/pypi">PyPI</a></p>
+                <p>This site shows Python 3 support for 360 most downloaded packages on <a href="https://pypi.org/">PyPI</a></p>
                 <ol>
                     <li><span class="text-success">Green</span> packages support Python 3 (or has drop in replacement package which supports Python 3),</li>
                     <li><span class="text-muted">White</span> packages don't support Python 3 yet.</li>
@@ -151,7 +151,7 @@
             </div>
         </div>
         <h2>Thanks</h2>
-            <p>This is derivative work from <a href="http://pythonwheels.com/">Python Wheels</a>, a site that tracks progress in new Python package distribution standard called <a href="https://pypi.python.org/pypi/wheel">Wheels</a>. All the credits goes to <a href="http://meshy.co.uk/">meshy</a>.
+            <p>This is derivative work from <a href="http://pythonwheels.com/">Python Wheels</a>, a site that tracks progress in new Python package distribution standard called <a href="https://pypi.org/project/wheel/">Wheels</a>. All the credits goes to <a href="http://meshy.co.uk/">meshy</a>.
         <!-- fork me -->
         <a href="https://github.com/chhantyal/py3readiness"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github-camo.global.ssl.fastly.net/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
         <footer>
@@ -170,7 +170,7 @@
             <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-50e3db385da4dd15"></script>
             <!-- AddThis Button END -->
             <p>Maintained by <a href="http://twitter.com/chhantyal">chhantyal</a>, updates on <a href="https://twitter.com/py3readiness">Twitter</a>, source code on <a href="https://github.com/chhantyal/py3readiness">GitHub</a>.</p>
-            <p>Last updated <span class="date"></span>. (Updated weekly.)</p>
+            <p>Last updated <span class="date"></span>.</p>
         </footer>
     </div>
     <script>

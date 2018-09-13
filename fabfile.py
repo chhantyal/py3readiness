@@ -1,6 +1,6 @@
 import os
 from contextlib import contextmanager
-from fabric.api import env, run, local, prefix, sudo
+from fabric.api import env, run, prefix
 
 
 def live():

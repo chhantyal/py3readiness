@@ -1,0 +1,26 @@
+language: python
+
+# Supported CPython versions:
+# https://en.wikipedia.org/wiki/CPython#Version_history
+python:
+ - 2.7
+ - 3.6
+
+sudo: false
+
+install:
+ - pip install flake8
+ - pip install -r requirements.txt
+
+script:
+ # Static analysis
+ - flake8 --statistics --count .
+
+ # Test run
+ - make generate
+
+matrix:
+  fast_finish: true
+
+notifications:
+  email: false
