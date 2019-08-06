@@ -28,12 +28,15 @@
                 $(".list-upto-120").html(populate(data.slice(0, 120)));
                 $(".list-upto-240").html(populate(data.slice(120, 240)));
                 $(".list-upto-360").html(populate(data.slice(240, 360)));
+                $(".list-upto-480").html(populate(data.slice(360, 480)));
+                $(".list-upto-600").html(populate(data.slice(480, 600)));
+                $(".list-upto-720").html(populate(data.slice(600, 720)));
 
                 handle_css();
             };
 
             function handle_css(){
-                var ids = [".list-upto-120", ".list-upto-240", ".list-upto-360"]
+                var ids = [".list-upto-120", ".list-upto-240", ".list-upto-360", ".list-upto-480", ".list-upto-600", ".list-upto-720"]
 
                 $.each(ids, function(idx, id) {
 
@@ -93,10 +96,10 @@
         <div class="row">
             <div class="col-sm-12 col-md-12">
                 <h1>Python 3 Readiness</h1>
-                <p class="text-center text-info">Python 3 support graph for 360 most popular Python packages!</p>
+                <p class="text-center text-info">Python 3 support graph for 720 most popular Python packages!</p>
                 <object data="wheel.svg" type="image/svg+xml" class="center-block"></object>
                 <h2>What is this about?</h2>
-                <p>This site shows Python 3 support for 360 most downloaded packages on <a href="https://pypi.org/">PyPI</a></p>
+                <p>This site shows Python 3 support for 720 most downloaded packages on <a href="https://pypi.org/">PyPI</a></p>
                 <ol>
                     <li><span class="text-success">Green</span> packages support Python 3 (or has drop in replacement package which supports Python 3),</li>
                     <li><span class="text-muted">White</span> packages don't support Python 3 yet.</li>
@@ -148,6 +151,32 @@
                     </div>
                 </div>
                 <div class="list-upto-360"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-4">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title text-center"><span class="glyphicon glyphicon-list"></span> Top 360 - 480</h3>
+                    </div>
+                </div>
+                <div class="list-upto-480"></div>
+            </div>
+            <div class="col-sm-4 col-md-4">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title text-center"><span class="glyphicon glyphicon-list"></span> Top 480 - 600</h3>
+                    </div>
+                </div>
+                <div class="list-upto-600"></div>
+            </div>
+            <div class="col-sm-4 col-md-4">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title text-center"><span class="glyphicon glyphicon-list"></span> Top 600 - 720</h3>
+                    </div>
+                </div>
+                <div class="list-upto-720"></div>
             </div>
         </div>
         <h2>Thanks</h2>
