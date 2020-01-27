@@ -1,7 +1,7 @@
 Python 3 readiness
 ==================
 
-Python 3 support graph for most popular Python libraries and packages http://py3readiness.org
+Python 3 support graph for most popular Python libraries and packages http://chhantyal.net/py3readiness
 
 
 ## How do you identify Python 3 support?
